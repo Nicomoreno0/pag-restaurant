@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Comarca — Gastropub · Cruz del Eje</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+  :root {
+    --verde: #1f5b3a;
+    --verde-claro: #2f8a57;
+    --crema: #fbf6ee;
+    --crema-oscuro: #eadfcf;
+    --dorado: #d2a43a;
+    --dorado-claro: #f0c766;
+    --tierra: #b06a0b;
+    --oscuro: #14140f;
+    --texto: #11110c;
+    --gris-suave: #2f2f25;
+    --on-dark: rgba(251, 246, 238, 0.86);
+    --on-dark-muted: rgba(251, 246, 238, 0.78);
+  }
+ 
+  html { scroll-behavior: smooth; }
+ 
+  body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    background: var(--crema);
+    color: var(--texto);
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+ 
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(20, 20, 15, 0.62);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(210, 164, 58, 0.28);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+    transition: background 0.3s;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--crema);
+    letter-spacing: 0.02em;
+    opacity: 0.95;
+  }
+  .nav-links {
+    display: flex;
+    gap: 1.1rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--crema);
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
+    font-weight: 600;
+    padding: 0.55rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid rgba(251, 246, 238, 0.16);
+    background: rgba(0,0,0,0.10);
+  }
+  .nav-links a:hover {
+    color: var(--oscuro);
+    border-color: rgba(240, 199, 102, 0.7);
+    background: rgba(240, 199, 102, 0.75);
+    transform: translateY(-1px);
+  }
+ 
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left {
+    background: var(--oscuro);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c4a35a' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--dorado);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--dorado);
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 6vw, 6rem);
+    line-height: 1.05;
+    color: var(--crema);
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--dorado-claro);
+  }
+  .hero-subtitle {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--on-dark-muted);
+    max-width: 380px;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 1;
+  }
+  .btn-reserva {
+    display: inline-block;
+    background: var(--dorado);
+    color: var(--oscuro);
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 1rem 2.4rem;
+    transition: background 0.25s, transform 0.2s;
+    align-self: flex-start;
+    position: relative;
+    z-index: 1;
+  }
+  .btn-reserva:hover {
+    background: var(--dorado-claro);
+    transform: translateY(-2px);
+  }
+  .hero-rating {
+    position: absolute;
+    bottom: 3rem;
+    left: 4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    z-index: 1;
+  }
+  .stars {
+    display: flex;
+    gap: 3px;
+  }
+  .star {
+    width: 14px;
+    height: 14px;
+    fill: var(--dorado);
+  }
+  .rating-text {
+    font-size: 0.75rem;
+    color: rgba(251, 246, 238, 0.72);
+    letter-spacing: 0.05em;
+  }
+  .hero-right {
+    position: relative;
+    background:
+      linear-gradient(180deg, rgba(20,20,15,0.20) 0%, rgba(20,20,15,0.60) 60%, rgba(20,20,15,0.85) 100%),
+      url("assets/ambiente-3.png");
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+  }
+  .hero-right::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(900px 520px at 60% 40%, rgba(210,164,58,0.20), transparent 55%),
+      radial-gradient(900px 520px at 20% 70%, rgba(47,138,87,0.18), transparent 60%);
+    pointer-events: none;
+  }
+  .hero-illustration {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-bg-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(8rem, 15vw, 16rem);
+    font-style: italic;
+    color: rgba(255,255,255,0.06);
+    user-select: none;
+    white-space: nowrap;
+    transform: rotate(-10deg);
+    letter-spacing: -0.02em;
+  }
+  .hero-badge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: rgba(20, 20, 15, 0.34);
+    border: 1px solid rgba(251, 246, 238, 0.14);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.3rem;
+  }
+  .badge-icon { font-size: 2.5rem; line-height: 1; }
+  .badge-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--crema);
+    font-style: italic;
+  }
+  .badge-sub {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(251, 246, 238, 0.82);
+  }
+ 
+  /* MARQUEE */
+  .marquee-strip {
+    background: var(--dorado);
+    padding: 0.85rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-inner {
+    display: inline-flex;
+    gap: 0;
+    animation: marquee 22s linear infinite;
+  }
+  .marquee-inner span {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--oscuro);
+    font-weight: 500;
+    padding: 0 2.5rem;
+  }
+  .marquee-inner span::before {
+    content: '✦';
+    margin-right: 2.5rem;
+    opacity: 0.6;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+ 
+  /* SECTION: PROPUESTA */
+  .propuesta {
+    padding: 7rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .section-tag {
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--dorado);
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .section-tag::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: var(--dorado);
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1.2;
+    color: var(--oscuro);
+  }
+  .section-title em { font-style: italic; color: var(--verde-claro); }
+  .propuesta-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .propuesta-text {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: #3d3d32;
+    grid-column: 1 / -1;
+    margin-bottom: 1rem;
+  }
+  .card-feature {
+    background: white;
+    border: 1px solid var(--crema-oscuro);
+    padding: 2rem 1.8rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .card-feature:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.07);
+  }
+  .card-feature::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--dorado);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .card-feature:hover::after { transform: scaleX(1); }
+  .card-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--oscuro);
+    margin-bottom: 0.5rem;
+  }
+  .card-desc {
+    font-size: 0.87rem;
+    line-height: 1.7;
+    color: #4b4b3f;
+  }
+ 
+  /* MENU SECTION */
+  .menu-section {
+    background: var(--oscuro);
+    padding: 7rem 4rem;
+    overflow: hidden;
+  }
+  .menu-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+  }
+  .menu-title-area .section-tag { color: var(--dorado); }
+  .menu-title-area .section-tag::before { background: var(--dorado); }
+  .menu-title-area .section-title { color: var(--crema); }
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: rgba(196, 163, 90, 0.15);
+  }
+  .menu-item {
+    background: var(--oscuro);
+    padding: 2.5rem 2rem;
+    transition: background 0.2s;
+    position: relative;
+  }
+  .menu-item:hover { background: #222218; }
+  .menu-item-cat {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dorado);
+    margin-bottom: 1rem;
+  }
+  .menu-item-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: var(--crema);
+    margin-bottom: 0.6rem;
+  }
+  .menu-item-desc {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--on-dark);
+  }
+  .menu-item-accent {
+    position: absolute;
+    top: 2.5rem;
+    right: 2rem;
+    font-size: 2rem;
+    opacity: 0.25;
+  }
+ 
+  /* AMBIENTE */
+  .ambiente {
+    padding: 7rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .ambiente-header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+  .ambiente-header .section-tag {
+    justify-content: center;
+  }
+  .ambiente-header .section-tag::before { display: none; }
+  .ambiente-header .section-tag::after {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: var(--dorado);
+  }
+  .ambiente-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 300px 200px;
+    gap: 1rem;
+  }
+  .ambiente-card {
+    overflow: hidden;
+    position: relative;
+    background: var(--verde);
+    display: block;
+    text-decoration: none;
+  }
+  .ambiente-card.has-photo {
+    background: #0f0f0b;
+  }
+  .ambiente-card.has-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(20,20,15,0.25) 0%, rgba(20,20,15,0.72) 70%, rgba(20,20,15,0.86) 100%);
+    pointer-events: none;
+  }
+  .ambiente-card.has-photo .ambiente-card-title {
+    color: white;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  }
+  .ambiente-card.has-photo .ambiente-card-sub {
+    color: rgba(255,255,255,0.78);
+    text-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  }
+  .ambiente-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(1.08) contrast(1.05);
+    transform: scale(1.02);
+    transition: transform 0.6s ease;
+  }
+  .ambiente-card:hover .ambiente-photo {
+    transform: scale(1.08);
+  }
+  .ambiente-card:first-child {
+    grid-row: 1 / 3;
+  }
+  .ambiente-card-bg {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(4rem, 8vw, 9rem);
+    opacity: 0.12;
+    transition: transform 0.5s, opacity 0.3s;
+  }
+  .ambiente-card:hover .ambiente-card-bg {
+    transform: scale(1.1);
+    opacity: 0.18;
+  }
+  .ambiente-card-label {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    z-index: 2;
+  }
+  .ambiente-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: white;
+    margin-bottom: 0.3rem;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  }
+  .ambiente-card-sub {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.78);
+    letter-spacing: 0.08em;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  }
+  .card-verde-claro { background: var(--verde-claro); }
+  .card-tierra { background: var(--tierra); }
+  .card-verde-oscuro { background: #1d3020; }
+  .card-dorado-bg { background: var(--dorado); }
+  .card-dorado-bg .ambiente-card-title { color: var(--oscuro); }
+  .card-dorado-bg .ambiente-card-sub { color: rgba(26,26,20,0.55); }
+ 
+  /* RESEÑAS */
+  .resenas {
+    background: var(--crema-oscuro);
+    padding: 7rem 4rem;
+  }
+  .resenas-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .resenas-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+    align-items: end;
+  }
+  .rating-big {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    margin: 1rem 0 0.5rem;
+  }
+  .rating-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    line-height: 1;
+    color: var(--oscuro);
+  }
+  .rating-max {
+    font-size: 1.5rem;
+    color: rgba(20, 20, 15, 0.55);
+  }
+  .resenas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .resena-card {
+    background: white;
+    padding: 2rem 1.8rem;
+    border: 1px solid var(--crema-oscuro);
+    position: relative;
+  }
+  .resena-card::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    color: var(--dorado);
+    opacity: 0.3;
+    position: absolute;
+    top: 0.5rem;
+    right: 1.5rem;
+    line-height: 1;
+  }
+  .resena-stars {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 1rem;
+  }
+  .resena-star { font-size: 12px; color: var(--dorado); }
+  .resena-text {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--texto);
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+  .resena-author {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(31, 31, 24, 0.62);
+  }
+ 
+  /* UBICACIÓN / CTA */
+  .cta-section {
+    background: var(--verde);
+    padding: 7rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: 'La Comarca';
+    font-family: 'Playfair Display', serif;
+    font-size: 18vw;
+    font-style: italic;
+    color: rgba(255,255,255,0.03);
+    position: absolute;
+    bottom: -3rem;
+    right: -2rem;
+    white-space: nowrap;
+    user-select: none;
+    pointer-events: none;
+  }
+  .cta-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .cta-left .section-tag { color: rgba(196, 163, 90, 0.9); }
+  .cta-left .section-tag::before { background: rgba(196, 163, 90, 0.9); }
+  .cta-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    color: var(--crema);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+  .cta-title em { font-style: italic; color: var(--dorado-claro); }
+  .cta-text {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--on-dark-muted);
+    margin-bottom: 2.5rem;
+  }
+  .cta-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-block;
+    background: var(--dorado);
+    color: var(--oscuro);
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 1rem 2.4rem;
+    transition: background 0.25s;
+  }
+  .btn-primary:hover { background: var(--dorado-claro); }
+  .btn-ghost {
+    display: inline-block;
+    border: 1px solid rgba(196, 163, 90, 0.4);
+    color: var(--crema);
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 1rem 2.4rem;
+    transition: border-color 0.25s, background 0.25s;
+  }
+  .btn-ghost:hover {
+    border-color: var(--dorado);
+    background: rgba(196, 163, 90, 0.08);
+  }
+  .cta-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .info-row {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .info-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .info-icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(196, 163, 90, 0.12);
+    border: 1px solid rgba(196, 163, 90, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .info-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--dorado);
+    margin-bottom: 0.3rem;
+  }
+  .info-value {
+    font-size: 0.95rem;
+    color: rgba(251, 246, 238, 0.86);
+    line-height: 1.5;
+  }
+ 
+  /* FOOTER */
+  footer {
+    background: var(--oscuro);
+    padding: 3rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(196, 163, 90, 0.1);
+  }
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--crema);
+    opacity: 0.7;
+  }
+  .footer-copy {
+    font-size: 0.75rem;
+    color: rgba(251, 246, 238, 0.6);
+    letter-spacing: 0.05em;
+  }
+  .footer-map-link {
+    font-size: 0.75rem;
+    color: var(--dorado);
+    text-decoration: none;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .footer-map-link:hover { opacity: 1; }
+ 
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { min-height: 280px; }
+    .hero-left { padding: 7rem 2rem 3rem; }
+    .hero-rating { left: 2rem; }
+    .propuesta { grid-template-columns: 1fr; gap: 2.5rem; padding: 4rem 2rem; }
+    .propuesta-content { grid-template-columns: 1fr; }
+    .propuesta-text { grid-column: auto; }
+    .menu-section { padding: 4rem 2rem; }
+    .menu-grid { grid-template-columns: 1fr; }
+    .ambiente { padding: 4rem 2rem; }
+    .ambiente-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .ambiente-card:first-child { grid-row: auto; }
+    .resenas { padding: 4rem 2rem; }
+    .resenas-header { grid-template-columns: 1fr; gap: 1.5rem; }
+    .resenas-grid { grid-template-columns: 1fr; }
+    .cta-section { padding: 4rem 2rem; }
+    .cta-inner { grid-template-columns: 1fr; gap: 3rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem; }
+    .menu-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  }
+ 
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow { animation: fadeUp 0.7s 0.2s both; }
+  .hero-title { animation: fadeUp 0.7s 0.4s both; }
+  .hero-subtitle { animation: fadeUp 0.7s 0.55s both; }
+  .btn-reserva { animation: fadeUp 0.7s 0.7s both; }
+  .hero-rating { animation: fadeUp 0.7s 0.85s both; }
+</style>
+</head>
+<body>
+ 
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">La Comarca</div>
+  <ul class="nav-links">
+    <li><a href="#propuesta">El Lugar</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#ambiente">Ambiente</a></li>
+    <li><a href="#resenas">Reseñas</a></li>
+    <li><a href="#contacto">Ubicación</a></li>
+  </ul>
+</nav>
+ 
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Gastropub · Cruz del Eje, Córdoba</div>
+    <h1 class="hero-title">Donde el<br>tiempo se<br><em>detiene</em></h1>
+    <p class="hero-subtitle">Un espacio al aire libre donde la buena comida, los cócteles artesanales y la música perfecta crean noches que no se olvidan.</p>
+    <a href="#contacto" class="btn-reserva">Visitanos</a>
+    <div class="hero-rating">
+      <div class="stars">
+        <svg class="star" viewBox="0 0 20 20"><path d="M10 1l2.39 6.26H18l-4.57 3.73 1.74 6.01L10 13.27l-5.17 3.73 1.74-6.01L2 7.26h5.61z"/></svg>
+        <svg class="star" viewBox="0 0 20 20"><path d="M10 1l2.39 6.26H18l-4.57 3.73 1.74 6.01L10 13.27l-5.17 3.73 1.74-6.01L2 7.26h5.61z"/></svg>
+        <svg class="star" viewBox="0 0 20 20"><path d="M10 1l2.39 6.26H18l-4.57 3.73 1.74 6.01L10 13.27l-5.17 3.73 1.74-6.01L2 7.26h5.61z"/></svg>
+        <svg class="star" viewBox="0 0 20 20"><path d="M10 1l2.39 6.26H18l-4.57 3.73 1.74 6.01L10 13.27l-5.17 3.73 1.74-6.01L2 7.26h5.61z"/></svg>
+        <svg class="star" viewBox="0 0 20 20"><path d="M10 1l2.39 6.26H18l-4.57 3.73 1.74 6.01L10 13.27l-5.17 3.73 1.74-6.01L2 7.26h5.61z"/></svg>
+      </div>
+      <span class="rating-text">5.0 · 25 reseñas en Google</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-illustration">
+      <span class="hero-bg-text">Comarca</span>
+    </div>
+    <div class="hero-badge">
+      <span class="badge-icon">🌿</span>
+      <span class="badge-title">Al aire libre</span>
+      <span class="badge-sub">Jardín exterior</span>
+    </div>
+  </div>
+</section>
+ 
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span>Hamburguesas artesanales</span>
+    <span>Pizzas al horno</span>
+    <span>Cócteles de autor</span>
+    <span>Música en vivo</span>
+    <span>Jardín exterior</span>
+    <span>Cruz del Eje</span>
+    <span>Hamburguesas artesanales</span>
+    <span>Pizzas al horno</span>
+    <span>Cócteles de autor</span>
+    <span>Música en vivo</span>
+    <span>Jardín exterior</span>
+    <span>Cruz del Eje</span>
+  </div>
+</div>
+ 
+<!-- PROPUESTA -->
+<section class="propuesta" id="propuesta">
+  <div>
+    <div class="section-tag">El lugar</div>
+    <h2 class="section-title">Un espacio que <em>invita</em> a quedarse</h2>
+  </div>
+  <div class="propuesta-content">
+    <p class="propuesta-text">La Comarca nació como un rincón tranquilo en Cruz del Eje donde la gente puede desconectarse, disfrutar de una buena comida y una copa bien hecha. El ambiente natural y la decoración cuidada hacen que cada visita se sienta especial, tanto para una cena íntima como para salir con amigos.</p>
+    <div class="card-feature">
+      <span class="card-icon">🍔</span>
+      <div class="card-title">Cocina con identidad</div>
+      <p class="card-desc">Hamburguesas 10/10 y pizzas especiales elaboradas con ingredientes seleccionados. Precios accesibles sin resignar calidad.</p>
+    </div>
+    <div class="card-feature">
+      <span class="card-icon">🍹</span>
+      <div class="card-title">Cócteles de autor</div>
+      <p class="card-desc">Desde el clásico Daiquiri de frutilla hasta firmas propias de la casa que sorprenden. Cada copa es una experiencia.</p>
+    </div>
+    <div class="card-feature">
+      <span class="card-icon">🌙</span>
+      <div class="card-title">Noches ideales</div>
+      <p class="card-desc">La música ambiente perfecta complementa las veladas. Ideal para las noches templadas de Cruz del Eje bajo las estrellas.</p>
+    </div>
+    <div class="card-feature">
+      <span class="card-icon">✦</span>
+      <div class="card-title">Atención de primera</div>
+      <p class="card-desc">Un servicio amable y atento que hace que cada visita valga la pena. El equipo de La Comarca te hace sentir como en casa.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="menu-inner">
+    <div class="menu-header">
+      <div class="menu-title-area">
+        <div class="section-tag">Lo que servimos</div>
+        <h2 class="section-title">Nuestras <em>especialidades</em></h2>
+      </div>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-item-cat">Hamburguesas</div>
+        <div class="menu-item-name">La Comarca Burger</div>
+        <p class="menu-item-desc">La clásica de la casa. Pan brioche, carne 200g, queso cheddar curado, lechuga y salsa especial de la Comarca.</p>
+        <span class="menu-item-accent">🍔</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-cat">Pizzas</div>
+        <div class="menu-item-name">Especial de la casa</div>
+        <p class="menu-item-desc">La mitad especial, la mitad napolitana. Una combinación irresistible para los amantes de la pizza.</p>
+        <span class="menu-item-accent">🍕</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-cat">Cócteles</div>
+        <div class="menu-item-name">Daiquiri de frutilla</div>
+        <p class="menu-item-desc">Ron blanco, frutillas frescas, jugo de limón y azúcar. Refrescante, frutal, perfectamente equilibrado.</p>
+        <span class="menu-item-accent">🍓</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-cat">Hamburguesas</div>
+        <div class="menu-item-name">Crispy Burguer</div>
+        <p class="menu-item-desc">Medallón crocante, aderezo picante, encurtidos caseros y rúcula fresca. Para los que buscan textura y sabor.</p>
+        <span class="menu-item-accent">🔥</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-cat">Pizzas</div>
+        <div class="menu-item-name">Napolitana</div>
+        <p class="menu-item-desc">Tomate San Marzano, mozzarella fresca, albahaca, aceite de oliva. La simplicidad llevada a su máxima expresión.</p>
+        <span class="menu-item-accent">🍅</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-cat">Cócteles de autor</div>
+        <div class="menu-item-name">Firma de la Comarca</div>
+        <p class="menu-item-desc">Cócteles únicos elaborados por nuestros bartenders. Preguntá por las creaciones de la noche.</p>
+        <span class="menu-item-accent">🍸</span>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- AMBIENTE -->
+<section class="ambiente" id="ambiente">
+  <div class="ambiente-header">
+    <div class="section-tag">Nuestra propuesta</div>
+    <h2 class="section-title">El <em>ambiente</em> lo hace diferente</h2>
+  </div>
+  <div class="ambiente-grid">
+    <a class="ambiente-card card-verde-oscuro has-photo" href="https://maps.app.goo.gl/BdhhXRvsmt1hR9LV8" target="_blank" rel="noopener">
+      <img class="ambiente-photo" src="assets/ambiente-1.png" alt="Espacio al aire libre en La Comarca">
+      <div class="ambiente-card-label">
+        <div class="ambiente-card-title">Espacio al aire libre</div>
+        <div class="ambiente-card-sub">Jardín exterior iluminado</div>
+      </div>
+    </a>
+    <a class="ambiente-card card-tierra has-photo" href="https://maps.app.goo.gl/KKPzVhDcEwMAuLCw6" target="_blank" rel="noopener">
+      <img class="ambiente-photo" src="assets/ambiente-2.png" alt="Ambiente y decoración de La Comarca">
+      <div class="ambiente-card-label">
+        <div class="ambiente-card-title">Música perfecta</div>
+        <div class="ambiente-card-sub">Ambiente cuidado</div>
+      </div>
+    </a>
+    <div class="ambiente-card has-photo">
+      <img class="ambiente-photo" src="assets/ambiente-4.png" alt="Ambiente con luces y fuegos La Comarca">
+      <div class="ambiente-card-label">
+        <div class="ambiente-card-title">Noches especiales</div>
+        <div class="ambiente-card-sub">Ideal para el verano</div>
+      </div>
+    </div>
+    <div class="ambiente-card has-photo">
+      <img class="ambiente-photo" src="assets/ambiente-3.png" alt="Jardín decorado con luces y mesas La Comarca">
+      <div class="ambiente-card-label">
+        <div class="ambiente-card-title">Decoración única</div>
+        <div class="ambiente-card-sub">Diseño con identidad</div>
+      </div>
+    </div>
+    <div class="ambiente-card has-photo">
+      <img class="ambiente-photo" src="assets/ambiente-5.png" alt="Personas compartiendo en el jardín La Comarca">
+      <div class="ambiente-card-label">
+        <div class="ambiente-card-title">Para grupos</div>
+        <div class="ambiente-card-sub">Cenas y salidas</div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- RESEÑAS -->
+<section class="resenas" id="resenas">
+  <div class="resenas-inner">
+    <div class="resenas-header">
+      <div>
+        <div class="section-tag">Lo que dicen</div>
+        <h2 class="section-title">Reseñas <em>reales</em> de Google</h2>
+      </div>
+      <div>
+        <div class="rating-big">
+          <span class="rating-number">5.0</span>
+          <span class="rating-max">/ 5</span>
+        </div>
+        <div class="stars" style="display:flex;gap:5px;margin-bottom:0.5rem">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="#c4a35a"><path d="M10 1l2.39 6.26H18l-4.57 3.73 1.74 6.01L10 13.27l-5.17 3.73 1.74-6.01L2 7.26h5.61z"/></svg>
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="#c4a35a"><path d="M10 1l2.39 6.26H18l-4.57 3.73 1.74 6.01L10 13.27l-5.17 3.73 1.74-6.01L2 7.26h5.61z"/></svg>
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="#c4a35a"><path d="M10 1l2.39 6.26H18l-4.57 3.73 1.74 6.01L10 13.27l-5.17 3.73 1.74-6.01L2 7.26h5.61z"/></svg>
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="#c4a35a"><path d="M10 1l2.39 6.26H18l-4.57 3.73 1.74 6.01L10 13.27l-5.17 3.73 1.74-6.01L2 7.26h5.61z"/></svg>
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="#c4a35a"><path d="M10 1l2.39 6.26H18l-4.57 3.73 1.74 6.01L10 13.27l-5.17 3.73 1.74-6.01L2 7.26h5.61z"/></svg>
+        </div>
+        <p style="font-size:0.8rem;color:rgba(17,17,12,0.72);">25 reseñas · Google Maps</p>
+      </div>
+    </div>
+    <div class="resenas-grid">
+      <div class="resena-card">
+        <div class="resena-stars">★★★★★</div>
+        <p class="resena-text">Un lugar hermoso y cómodo para una cena tranquila. Esta noche disfruté una deliciosa pizza, mitad especial, mitad napolitana y un Daiquiri de frutilla.</p>
+        <div class="resena-author">Cliente · Google</div>
+      </div>
+      <div class="resena-card">
+        <div class="resena-stars">★★★★★</div>
+        <p class="resena-text">La comida estuvo deliciosa, los cócteles de autor fueron verdaderamente espectaculares, y el ambiente fue increíblemente agradable. Muy recomendable.</p>
+        <div class="resena-author">Cliente · Google</div>
+      </div>
+      <div class="resena-card">
+        <div class="resena-stars">★★★★★</div>
+        <p class="resena-text">Un espacio al aire libre hermosamente decorado con una atmósfera tranquila. Ideal para noches templadas y perfecta para el verano. El tiempo parece detenerse.</p>
+        <div class="resena-author">Cliente · Google</div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- CTA / CONTACTO -->
+<section class="cta-section" id="contacto">
+  <div class="cta-inner">
+    <div class="cta-left">
+      <div class="section-tag">Vení a visitarnos</div>
+      <h2 class="cta-title">Tu próxima <em>noche perfecta</em> empieza acá</h2>
+      <p class="cta-text">La Comarca te espera en Cruz del Eje con una mesa lista, un cóctel en camino y la mejor música de fondo. Solo tenés que venir.</p>
+      <div class="cta-btns">
+        <a href="https://maps.app.goo.gl/DM1BQKhM1nCZEcLa9" target="_blank" class="btn-primary">Cómo llegar</a>
+        <a href="https://wa.me/5493549000000" class="btn-ghost">WhatsApp</a>
+      </div>
+    </div>
+    <div class="cta-right">
+      <div class="info-row">
+        <div class="info-icon">📍</div>
+        <div>
+          <div class="info-label">Dirección</div>
+          <div class="info-value">Arturo U. Illia 3995<br>Cruz del Eje, Córdoba, Argentina</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🕐</div>
+        <div>
+          <div class="info-label">Horario</div>
+          <div class="info-value">Jueves a domingo · Desde las 20:00 hs</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🌿</div>
+        <div>
+          <div class="info-label">Tipo de espacio</div>
+          <div class="info-value">Gastropub con jardín al aire libre · Ideal para verano y noches templadas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">La Comarca</div>
+  <span class="footer-copy">Cruz del Eje · Córdoba · Argentina</span>
+  <a href="https://maps.app.goo.gl/DM1BQKhM1nCZEcLa9" target="_blank" class="footer-map-link">Ver en Google Maps →</a>
+</footer>
+ 
+</body>
+</html>
